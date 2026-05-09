@@ -218,6 +218,35 @@ server {
 
 ### Apache (using .htaccess — already included)
 
+### Vercel Deployment
+
+If you are deploying from GitHub to Vercel, add these environment variables in the Vercel project settings:
+
+```env
+APP_NAME=Travel Planner AI
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://your-project.vercel.app
+
+DB_CONNECTION=mongodb
+DB_DSN=mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/travel_planner?retryWrites=true&w=majority
+DB_DATABASE=travel_planner
+DB_AUTHENTICATION_DATABASE=admin
+
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
+```
+
+Important:
+- Do not commit your Atlas password or `.env` file to GitHub.
+- URL-encode special characters in the MongoDB password if needed.
+- After changing env vars in Vercel, redeploy the project.
+
 The `public/.htaccess` handles URL rewriting automatically.
 
 ### Production Optimizations
