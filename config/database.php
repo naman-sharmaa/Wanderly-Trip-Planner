@@ -37,6 +37,7 @@ return [
         */
         'mongodb' => [
             'driver'   => 'mongodb',
+            'dsn'      => env('DB_DSN'),
             'host'     => env('DB_HOST', '127.0.0.1'),
             'port'     => env('DB_PORT', 27017),
             'database' => env('DB_DATABASE', 'travel_planner'),
@@ -44,8 +45,6 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'options'  => [
                 'database' => env('DB_AUTHENTICATION_DATABASE', 'admin'),
-                // For MongoDB Atlas DSN (uncomment and set DB_DSN in .env):
-                // 'dsn' => env('DB_DSN'),
             ],
         ],
 
