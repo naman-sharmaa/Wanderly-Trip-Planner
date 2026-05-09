@@ -43,6 +43,8 @@ sudo systemctl start mongod
 2. Create a free M0 cluster
 3. Get your connection string (looks like `mongodb+srv://...`)
 4. Set `DB_DSN=<your-connection-string>` in `.env`
+5. Set `DB_DATABASE=travel_planner`
+6. If your Atlas user uses authentication, keep the password URL-encoded if it contains special characters
 
 ---
 
@@ -130,9 +132,10 @@ DB_PASSWORD=your_mongo_password
 DB_CONNECTION=mongodb
 DB_DSN=mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/travel_planner?retryWrites=true&w=majority
 DB_DATABASE=travel_planner
+DB_AUTHENTICATION_DATABASE=admin
 ```
 
-Also update `config/database.php` for Atlas — uncomment the `dsn` option.
+The app already reads `DB_DSN` in `config/database.php`, so just set the value in `.env` or in your Vercel environment variables.
 
 ---
 
