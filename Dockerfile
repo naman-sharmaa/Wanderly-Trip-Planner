@@ -38,17 +38,25 @@ RUN apk add --no-cache \
 # Install MongoDB extension
 RUN pecl install mongodb && docker-php-ext-enable mongodb
 
-# Install Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copy application code
+# Composer stage: run composer install with PHP 8.2 CLI to avoid platform mismatches
+FROM php:8.2-cli-alpine AS composer
+WORKDIR /app
+RUN apk add --no-cache zip libzip-dev openssl icu-libs zlib
+COPY composer.json composer.lock ./
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php --install-dir=/usr/bin --filename=composer \
+    && php -r "unlink('composer-setup.php');"
+RUN composer install --no-dev --prefer-dist --no-scripts --no-progress --no-interaction
+
+# Copy application code into final image
 COPY . .
 
 # Copy built frontend assets from node stage
 COPY --from=frontend /build/public/build public/build
 
-# Install PHP dependencies (production only)
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Copy vendor from composer stage
+COPY --from=composer /app/vendor ./vendor
 
 # Create storage directories and set permissions
 RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views \
