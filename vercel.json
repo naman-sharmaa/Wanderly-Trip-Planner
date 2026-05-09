@@ -1,19 +1,13 @@
 {
-  "framework": "laravel",
   "buildCommand": "composer install && npm install && npm run build",
   "outputDirectory": "public",
   "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "false"
   },
-  "functions": {
-    "api/index.php": {
-      "runtime": "php-8.2"
-    }
-  },
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "^/(.*)$",
       "destination": "/api/index.php"
     }
   ]
