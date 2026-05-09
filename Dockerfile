@@ -8,7 +8,7 @@ COPY vite.config.js ./
 RUN npm run build
 
 # Stage 2: PHP runtime with Laravel
-FROM php:8.1-fpm-alpine
+FROM php:8.2-fpm-alpine
 
 WORKDIR /var/www/html
 
