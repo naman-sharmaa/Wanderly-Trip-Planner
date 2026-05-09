@@ -5,6 +5,11 @@
     "APP_ENV": "production",
     "APP_DEBUG": "false"
   },
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.5.0"
+    }
+  },
   "rewrites": [
     {
       "source": "^/(.*)$",
