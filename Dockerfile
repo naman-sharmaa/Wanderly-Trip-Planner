@@ -23,8 +23,6 @@ RUN apk add --no-cache \
     libjpeg-turbo-dev \
     libwebp-dev \
     zlib-dev \
-    libicu-dev \
-    icu-dev \
     autoconf \
     g++ \
     make \
@@ -35,7 +33,6 @@ RUN apk add --no-cache \
     pcntl \
     bcmath \
     gd \
-    intl \
     pdo
 
 # Install MongoDB extension
