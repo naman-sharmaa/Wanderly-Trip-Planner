@@ -1,0 +1,17 @@
+{
+  "resources/js/app.js": {
+    "file": "assets/app-t1FBqCHF.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/auth-google.js"
+    ]
+  },
+  "resources/js/auth-google.js": {
+    "file": "assets/auth-google-_zw76_qH.js",
+    "name": "auth-google",
+    "src": "resources/js/auth-google.js",
+    "isDynamicEntry": true
+  }
+}
