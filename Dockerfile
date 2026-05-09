@@ -8,7 +8,7 @@ COPY vite.config.js ./
 RUN npm run build
 
 ## Composer stage: run composer install with PHP 8.2 CLI to avoid platform mismatches
-FROM php:8.2-cli-alpine AS composer
+FROM php:8.4-cli-alpine AS composer
 WORKDIR /app
 RUN apk add --no-cache \
     git \
@@ -29,7 +29,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 RUN composer install --no-dev --prefer-dist --no-scripts --no-progress --no-interaction
 
 ## Final runtime stage: PHP-FPM with required extensions
-FROM php:8.2-fpm-alpine
+FROM php:8.4-fpm-alpine
 WORKDIR /var/www/html
 
 # Install system dependencies
