@@ -1,5 +1,5 @@
 {
-  "buildCommand": "php -r \"copy('https://getcomposer.org/installer','composer-setup.php');\" && php composer-setup.php --quiet && php composer.phar install --no-dev --prefer-dist --no-interaction --optimize-autoloader && rm -f composer-setup.php composer.phar || true && npm install && npm run build",
+  "buildCommand": "bash scripts/vercel-build.sh",
   "outputDirectory": "public",
   "env": {
     "APP_ENV": "production",
