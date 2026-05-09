@@ -10,7 +10,18 @@ RUN npm run build
 ## Composer stage: run composer install with PHP 8.2 CLI to avoid platform mismatches
 FROM php:8.2-cli-alpine AS composer
 WORKDIR /app
-RUN apk add --no-cache zip libzip-dev openssl icu-libs zlib
+RUN apk add --no-cache \
+    git \
+    unzip \
+    zip \
+    libzip-dev \
+    oniguruma-dev \
+    zlib-dev \
+    autoconf \
+    g++ \
+    make
+RUN docker-php-ext-install -j$(nproc) zip mbstring bcmath
+RUN pecl install mongodb && docker-php-ext-enable mongodb
 COPY composer.json composer.lock ./
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/bin --filename=composer \
