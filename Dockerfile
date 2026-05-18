@@ -67,8 +67,8 @@ COPY --from=frontend /build/public/build public/build
 # Copy vendor from composer stage
 COPY --from=composer /app/vendor ./vendor
 
-# Create storage directories and set permissions
-RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views \
+# Create storage and bootstrap cache directories and set permissions
+RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache \
     && chown -R www-data:www-data /var/www/html
 
