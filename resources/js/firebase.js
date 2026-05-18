@@ -19,17 +19,26 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const isConfigured = Boolean(
+  firebaseConfig.apiKey &&
+  firebaseConfig.authDomain &&
+  firebaseConfig.projectId &&
+  firebaseConfig.appId
+);
 
-// Initialize Firebase Authentication
-export const auth = getAuth(app);
+let app = null;
+export let auth = null;
+export let analytics = null;
 
-// Initialize Firebase Analytics (optional)
-let analytics = null;
-if (firebaseConfig.measurementId) {
-  analytics = getAnalytics(app);
+if (isConfigured) {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+
+  if (firebaseConfig.measurementId) {
+    analytics = getAnalytics(app);
+  }
+} else {
+  console.warn('Firebase client config is missing. Google sign-in will be disabled until VITE_FIREBASE_* variables are set.');
 }
-export { analytics };
 
 export default app;
